@@ -48,8 +48,6 @@ cd %{pkg_name}
 rm -rf $RPM_BUILD_ROOT
 cd %{pkg_name}
 %cabal_install
-%ghc_install_scripts
-%ghc_gen_filelists %{name}
 
 
 %clean
