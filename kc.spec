@@ -1,5 +1,9 @@
 %global pkg_name kc
 
+# use "rpmbuild --with static" to enable static linking (off by default)
+%{?_with_static:%define STATIC_BUILD 1}
+%{!?_with_static:%define STATIC_BUILD 0}
+
 %bcond_without doc
 %bcond_without prof
 
@@ -39,7 +43,11 @@ fi
 
 %build
 cd %{pkg_name}
-%cabal_configure --ghc %{?with_prof:-p}
+if [ %{STATIC_BUILD} -eq 0 ]; then
+  %cabal_configure --ghc %{?with_prof:-p} -O2 -fvia-C -foptc-O2 -fstatic -foptl-static
+else
+  %cabal_configure --ghc %{?with_prof:-p} -O2 -fvia-C -foptc-O2
+fi
 %cabal build
 %ghc_gen_scripts
 
