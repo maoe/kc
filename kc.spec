@@ -17,7 +17,7 @@ URL:            http://github.com/maoe/%{pkg_name}
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # fedora ghc archs:
 ExclusiveArch:  %{ix86} x86_64 ppc alpha
-BuildRequires:  ghc, ghc-rpm-macros
+BuildRequires:  ghc, ghc-rpm-macros, ghc-text-keepalived
 %if %{with doc}
 BuildRequires:  ghc-doc
 %endif
