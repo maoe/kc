@@ -1,0 +1,15 @@
+Name:          kc
+Version:       0.0.1
+Synopsis:      A parser libraries for keepalived.conf
+Author:        Mitsutoshi Aoe <maoe.maoe@gmail.com>
+Maintainer:    Mitsutoshi Aoe <maoe.maoe@gmail.com>
+Build-Type:    Simple
+Cabal-Version: >=1.2
+License:       BSD3
+License-File:  LICENSE
+Copyright:     Mitsutoshi Aoe <maoe.maoe@gmail.com>
+
+Executable kc
+  Main-Is:        Kc.hs
+  Build-Depends:  base, network, directory, mtl, parsec >= 3, filepath, FileManip, pretty, containers, cmdargs, text-keepalived
+  Ghc-Options:    -Wall -Werror -fno-warn-name-shadowing -fno-warn-type-defaults -fno-warn-orphans
