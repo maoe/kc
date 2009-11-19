@@ -1,18 +1,23 @@
+# rpmbuild -ba kc.spec                  (build with static linking)
+# rpmbuild -ba kc.spec --without static (build with dynamic linking)
 %global pkg_name kc
 
-# use "rpmbuild --with static" to enable static linking (off by default)
-%{?_with_static:%define STATIC_BUILD 1}
-%{!?_with_static:%define STATIC_BUILD 0}
-
+%bcond_without static
 %bcond_without doc
 %bcond_without prof
+
+%if %{with static}
+%define release_suffix static
+%else
+%define release_suffix %{?dist}
+%endif
 
 # ghc does not emit debug information
 %global debug_package %{nil}
 
 Name:           %{pkg_name}
 Version:        0.0.1
-Release:        1.%{?dist}
+Release:        2.%{release_suffix}
 Summary:        A command-line tool for keepalived.conf
 Group:          Applications/System
 License:        BSD
@@ -21,6 +26,9 @@ URL:            http://github.com/maoe/%{pkg_name}
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # fedora ghc archs:
 ExclusiveArch:  %{ix86} x86_64 ppc alpha
+%if %{with static}
+Requires:       gmp
+%endif
 BuildRequires:  ghc, ghc-rpm-macros, ghc-text-keepalived
 %if %{with doc}
 BuildRequires:  ghc-doc
@@ -43,11 +51,12 @@ fi
 
 %build
 cd %{pkg_name}
-if [ %{STATIC_BUILD} -eq 0 ]; then
-  %cabal_configure --ghc %{?with_prof:-p} -O2 -fvia-C -foptc-O2 -fstatic -foptl-static
-else
-  %cabal_configure --ghc %{?with_prof:-p} -O2 -fvia-C -foptc-O2
-fi
+%cabal clean
+%if %{with static}
+%cabal_configure --ghc %{?with_prof:-p} -O2 -fvia-C -foptc-O2 -fstatic -foptl-static
+%else
+%cabal_configure --ghc %{?with_prof:-p} -O2 -fvia-C -foptc-O2
+%endif
 %cabal build
 %ghc_gen_scripts
 
@@ -67,5 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/kc
 
 %changelog
+* Thu Nov 19 2009 Mitsutoshi Aoe <maoe.maoe@gmail.com> - 0.0.1-2
+- support for static linking
 * Thu Nov 19 2009 Mitsutoshi Aoe <maoe.maoe@gmail.com> - 0.0.1-1
 - initial revision
