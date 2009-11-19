@@ -10,6 +10,6 @@ License-File:  LICENSE
 Copyright:     Mitsutoshi Aoe <maoe.maoe@gmail.com>
 
 Executable kc
-  Main-Is:        Kc.hs
-  Build-Depends:  base, network, directory, mtl, parsec >= 3, filepath, FileManip, pretty, containers, cmdargs, text-keepalived
-  Ghc-Options:    -Wall -Werror -fno-warn-name-shadowing -fno-warn-type-defaults -fno-warn-orphans
+  Main-Is:       Kc.hs
+  Build-Depends: base, network, directory, mtl, parsec >= 3, filepath, FileManip, pretty, containers, cmdargs, text-keepalived
+  Ghc-Options:   -Wall -Werror -fno-warn-name-shadowing -fno-warn-type-defaults -fno-warn-orphans
