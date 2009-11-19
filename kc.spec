@@ -47,14 +47,14 @@ cd %{pkg_name}
 %install
 rm -rf $RPM_BUILD_ROOT
 cd %{pkg_name}
-%cabal_install
+%{__install} -D -m 755 dist/build/kc/kc $RPM_BUILD_ROOT/%{_bindir}/kc
 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 
-%files -f %{pkg_name}/%{name}.files
+%files
 %defattr(-,root,root,-)
 %{_bindir}/kc
 
