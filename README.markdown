@@ -19,7 +19,7 @@ Installation
 Donwload the latest kc RPM from the github [downloads page](http://github.com/maoe/kc/downloads).
 
 ### Install from source code
-You can configure, build, and install all inthe usual way with Cabal:
+You can configure, build, and install all in the usual way with Cabal:
 
     runhaskell Setup.hs configure
     runhaskell Setup.hs build
