@@ -4,17 +4,21 @@ kc: A command-line tool for keepalived.conf.
 kc is a command-line tool for manipulating keepalived.conf.
 
 
-REQUIREMENTS
+Requirements
 ------------------
-haskell-keepalived package requires following packages:
+If you want to install kc from source code, it requires following packages:
 
 - [text-keepalived](http://github.com/maoe/kc)
 - [cmdargs](http://hackage.haskell.org/package/cmdargs)
 - [mtl](http://hackage.haskell.org/package/mtl)
 
 
-INSTALLATION
+Installation
 ------------------
+### Binary Releases
+Donwload the latest kc RPM from the github [downloads page](http://github.com/maoe/kc/downloads).
+
+### Install from source code
 You can configure, build, and install all inthe usual way with Cabal:
 
     runhaskell Setup.hs configure
@@ -22,7 +26,7 @@ You can configure, build, and install all inthe usual way with Cabal:
     runhaskell Setup.hs install
 
 
-USAGE
+Usage
 ------------------
     kc verify [FLAG] [FILE]
       Verify configuration files.
